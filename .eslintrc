@@ -1,0 +1,13 @@
+{
+  "extends": "airbnb/base",
+  "rules": {
+    "comma-dangle": 0,
+    'prefer-template': 0,
+    'indent': [2, "tab", { 'SwitchCase': 1, 'VariableDeclarator': 1 }],
+    'arrow-body-style': [1, 'as-needed'],
+    'max-len': [2, 100, 2, {
+      'ignoreUrls': true,
+      'ignoreComments': true
+    }]
+  }
+}
