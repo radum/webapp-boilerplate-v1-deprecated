@@ -1,3 +1,5 @@
+[![David Dependency Badge](https://david-dm.org/radum/webapp-boilerplate/dev-status.svg)](https://david-dm.org/radum/webapp-boilerplate/#info=devDependencies)
+
 # ES6 Web app boilerplate using Gulp + Browserify
 
 This is heavily inspired by the [Yeoman generator-webapp](https://github.com/yeoman/generator-webapp) so most credit will go to the Yeoman team.
