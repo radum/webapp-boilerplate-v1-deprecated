@@ -9,6 +9,8 @@ import browserify from 'browserify'; // Providers "require" support, CommonJS
 import chalk from 'chalk'; // Allows for coloring for logging
 import source from 'vinyl-source-stream'; // Vinyl stream support
 import buffer from 'vinyl-buffer'; // Vinyl stream support
+import prettyFormatter from 'eslint-formatter-pretty'; // ESlint log pretty format
+
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
@@ -88,7 +90,7 @@ function lint(files, options) {
 		return gulp.src(files)
 			.pipe(reload({ stream: true, once: true }))
 			.pipe($.eslint(options))
-			.pipe($.eslint.format())
+			.pipe($.eslint.format(prettyFormatter))
 			.pipe($.if(!browserSync.active, $.eslint.failAfterError()));
 	};
 }
