@@ -54,6 +54,22 @@ gulp.task('styles', () => {
 		.pipe(reload({ stream: true }));
 });
 
+gulp.task('lint-css', function lintCssTask() {
+	const gulpStylelint = require('gulp-stylelint');
+
+	return gulp
+		.src('app/styles/*.scss')
+		.pipe(gulpStylelint({
+			syntax: 'scss',
+			reporters: [
+				{
+					formatter: 'string',
+					console: true
+				}
+			]
+		}));
+});
+
 gulp.task('scripts', () => {
 	const bundler = browserify('app/scripts/main.js', {
 		fullPaths: false,
@@ -215,7 +231,7 @@ gulp.task('wiredep', () => {
 		.pipe(gulp.dest('app'));
 });
 
-gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
+gulp.task('build', ['lint', 'lint-css','html', 'images', 'fonts', 'extras'], () => {
 	return gulp.src('dist/**/*').pipe($.size({ title: 'build', gzip: true }));
 });
 
