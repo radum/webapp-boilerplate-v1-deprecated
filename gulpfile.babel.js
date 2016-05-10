@@ -62,19 +62,20 @@ gulp.task('scripts', () => {
 
 	const bundleTimer = $.duration('JS browserify bundle time');
 
-	if (GLOBAL.config.env !== 'dev') {
-		bundler.transform(rollupify);
-	}
-
 	bundler.transform(babelify, {
 		presets: ['es2015'],
 		sourceMaps: true
 	});
 
+	if (GLOBAL.config.env !== 'dev') {
+		bundler.transform(rollupify);
+	}
+
 	return bundler
 		.bundle()
 		.on('error', mapError) // Map error reporting
 		.pipe(source('main.js')) // Set source name
+		.pipe($.plumber()) // Prevent pipe breaking caused by errors from gulp plugins
 		.pipe(buffer()) // Convert to gulp pipeline
 		.pipe($.rename('main.build.js')) // Rename the output file
 		.pipe($.sourcemaps.init({ loadMaps: true })) // Extract the inline sourcemaps
@@ -86,22 +87,29 @@ gulp.task('scripts', () => {
 });
 
 function lint(files, options) {
-	return () => {
-		return gulp.src(files)
-			.pipe(reload({ stream: true, once: true }))
-			.pipe($.eslint(options))
-			.pipe($.eslint.format(prettyFormatter))
-			.pipe($.if(!browserSync.active, $.eslint.failAfterError()));
-	};
+	return gulp.src(files)
+		.pipe(reload({ stream: true, once: true }))
+		.pipe($.eslint(options))
+		.pipe($.eslint.format(prettyFormatter))
+		.pipe($.if(!browserSync.active, $.eslint.failAfterError()));
 }
-const testLintOptions = {
-	env: {
-		mocha: true
-	}
-};
 
-gulp.task('lint', lint('app/scripts/**/*.js'));
-gulp.task('lint:test', lint('test/spec/**/*.js', testLintOptions));
+gulp.task('lint', () => {
+	return lint('app/scripts/**/*.js', {
+		fix: true
+	})
+	.pipe(gulp.dest('app/scripts'));
+});
+
+gulp.task('lint:test', () => {
+	return lint('test/spec/**/*.js', {
+		fix: true,
+		env: {
+			mocha: true
+		}
+	})
+	.pipe(gulp.dest('test/spec/**/*.js'));
+});
 
 gulp.task('html', ['styles', 'scripts'], () => {
 	return gulp.src('app/*.html')
