@@ -1,15 +1,15 @@
-import gulp from 'gulp';
-import gulpLoadPlugins from 'gulp-load-plugins';
-import browserSync from 'browser-sync'; // Used to automaticaly refresh the browser
-import del from 'del'; // Used for cleaning up the folders
-import { stream as wiredep } from 'wiredep'; // Used to inject bower components into index.html
-import babelify from 'babelify'; // Used to convert ES6 & JSX to ES5
-import rollupify from 'rollupify'; // Used to tree shake the code
-import browserify from 'browserify'; // Providers "require" support, CommonJS
-import chalk from 'chalk'; // Allows for coloring for logging
-import source from 'vinyl-source-stream'; // Vinyl stream support
-import buffer from 'vinyl-buffer'; // Vinyl stream support
-import prettyFormatter from 'eslint-formatter-pretty'; // ESlint log pretty format
+const gulp = require('gulp');
+const gulpLoadPlugins = require('gulp-load-plugins');
+const browserSync = require('browser-sync'); // Used to automaticaly refresh the browser
+const del = require('del'); // Used for cleaning up the folders
+const wiredep = require('wiredep').stream; // Used to inject bower components into index.html
+const babelify = require('babelify'); // Used to convert ES6 & JSX to ES5
+const rollupify = require('rollupify'); // Used to tree shake the code
+const browserify = require('browserify'); // Providers "require" support, CommonJS
+const chalk = require('chalk'); // Allows for coloring for logging
+const source = require('vinyl-source-stream'); // Vinyl stream support
+const buffer = require('vinyl-buffer'); // Vinyl stream support
+const prettyFormatter = require('eslint-formatter-pretty'); // ESlint log pretty format
 
 
 const $ = gulpLoadPlugins();

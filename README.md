@@ -6,6 +6,7 @@ This is heavily inspired by the [Yeoman generator-webapp](https://github.com/yeo
 
 ## Features
 
+* Enable [ES2015 features](https://babeljs.io/docs/learn-es2015/) using [Babel](https://babeljs.io)
 * CSS Autoprefixing
 * Built-in preview server with BrowserSync
 * Automagically compile Sass with [libsass](http://libsass.org)
@@ -14,7 +15,6 @@ This is heavily inspired by the [Yeoman generator-webapp](https://github.com/yeo
 * Map compiled CSS/JS to source stylesheets/js with source maps
 * Awesome image optimization
 * Automagically wire-up dependencies installed with [Bower](http://bower.io)
-* The gulpfile makes use of [ES2015 features](https://babeljs.io/docs/learn-es2015/) by using [Babel](https://babeljs.io)
 
 ## libsass
 
