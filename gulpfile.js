@@ -6,11 +6,11 @@ const wiredep = require('wiredep').stream; // Used to inject bower components in
 const babelify = require('babelify'); // Used to convert ES6 & JSX to ES5
 const rollupify = require('rollupify'); // Used to tree shake the code
 const browserify = require('browserify'); // Providers "require" support, CommonJS
+const gulpStylelint = require('gulp-stylelint'); // Stylelint linter
 const chalk = require('chalk'); // Allows for coloring for logging
 const source = require('vinyl-source-stream'); // Vinyl stream support
 const buffer = require('vinyl-buffer'); // Vinyl stream support
 const prettyFormatter = require('eslint-formatter-pretty'); // ESlint log pretty format
-
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
@@ -55,8 +55,6 @@ gulp.task('styles', () => {
 });
 
 gulp.task('lint-css', function lintCssTask() {
-	const gulpStylelint = require('gulp-stylelint');
-
 	return gulp
 		.src('app/styles/*.scss')
 		.pipe(gulpStylelint({
@@ -124,7 +122,7 @@ gulp.task('lint:test', () => {
 			mocha: true
 		}
 	})
-	.pipe(gulp.dest('test/spec/**/*.js'));
+	.pipe(gulp.dest('test/spec'));
 });
 
 gulp.task('html', ['styles', 'scripts'], () => {
@@ -138,13 +136,7 @@ gulp.task('html', ['styles', 'scripts'], () => {
 
 gulp.task('images', () => {
 	return gulp.src('app/images/**/*')
-		.pipe($.cache($.imagemin({
-			progressive: true,
-			interlaced: true,
-			// don't remove IDs from SVGs, they are often used
-			// as hooks for embedding and styling
-			svgoPlugins: [{ cleanupIDs: false }]
-		})))
+		.pipe($.cache($.imagemin()))
 		.pipe(gulp.dest('dist/images'));
 });
 
