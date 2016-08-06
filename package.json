@@ -6,8 +6,12 @@
   "license": "MIT @ Radu Micu",
   "author": "Radu Micu",
   "engines": {
-    "node": ">=4"
+    "node": ">=4",
+    "npm": ">=1.3"
   },
+  "files": [
+    "app"
+  ],
   "keywords": [
     "web",
     "app",
@@ -20,26 +24,26 @@
     "rollupify"
   ],
   "devDependencies": {
-    "babel-core": "^6.9.1",
-    "babel-preset-es2015": "^6.9.0",
+    "babel-core": "^6.13.2",
+    "babel-preset-es2015": "^6.13.2",
     "babelify": "^7.3.0",
-    "browser-sync": "^2.13.0",
-    "browserify": "^13.0.1",
+    "browser-sync": "^2.14.0",
+    "browserify": "^13.1.0",
     "chalk": "^1.1.3",
-    "del": "^2.2.0",
-    "eslint-config-airbnb": "^9.0.1",
+    "del": "^2.2.1",
+    "eslint-config-airbnb": "^10.0.0",
     "eslint-formatter-pretty": "^0.2.2",
-    "eslint-plugin-import": "^1.8.1",
+    "eslint-plugin-import": "^1.12.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.0.1",
     "gulp-babel": "^6.1.1",
     "gulp-cache": "^0.4.5",
     "gulp-cssnano": "^2.1.2",
     "gulp-duration": "0.0.0",
-    "gulp-eslint": "^2.0.0",
+    "gulp-eslint": "^3.0.1",
     "gulp-htmlmin": "^2.0.0",
     "gulp-if": "^2.0.1",
-    "gulp-imagemin": "^3.0.1",
+    "gulp-imagemin": "^3.0.2",
     "gulp-load-plugins": "^1.2.4",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.0.1",
@@ -47,28 +51,15 @@
     "gulp-sass": "^2.3.2",
     "gulp-size": "^2.1.0",
     "gulp-sourcemaps": "^1.5.0",
-    "gulp-stylelint": "^2.0.2",
-    "gulp-uglify": "^1.1.0",
+    "gulp-stylelint": "^3.0.0",
+    "gulp-uglify": "^2.0.0",
     "gulp-useref": "^3.1.0",
     "gulp-util": "^3.0.7",
     "main-bower-files": "^2.13.1",
-    "rollupify": "^0.3.1",
-    "postcss-scss": "^0.1.8",
+    "postcss-scss": "^0.1.9",
+    "rollupify": "^0.3.4",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "wiredep": "^4.0.0"
-  },
-  "eslintConfig": {
-    "env": {
-      "es6": true,
-      "node": true,
-      "browser": true
-    },
-    "rules": {
-      "quotes": [
-        2,
-        "single"
-      ]
-    }
   }
 }
