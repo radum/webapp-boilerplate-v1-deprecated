@@ -1,5 +1,20 @@
 [![David Dependency Badge](https://david-dm.org/radum/webapp-boilerplate/dev-status.svg)](https://david-dm.org/radum/webapp-boilerplate/#info=devDependencies)
 
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [ES6 Web app boilerplate using Gulp + Browserify](#es6-web-app-boilerplate-using-gulp-browserify)
+	- [Features](#features)
+	- [libsass](#libsass)
+	- [Getting Started](#getting-started)
+		- [Run with Docker](#run-with-docker)
+		- [Tasks](#tasks)
+		- [Gulp plugins](#gulp-plugins)
+		- [Browserify & ES6 modules](#browserify-es6-modules)
+	- [Contribute](#contribute)
+	- [License](#license)
+
+<!-- /TOC -->
+
 # ES6 Web app boilerplate using Gulp + Browserify
 
 This is heavily inspired by the [Yeoman generator-webapp](https://github.com/yeoman/generator-webapp) so most credit will go to the Yeoman team.
