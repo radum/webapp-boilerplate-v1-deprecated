@@ -1,0 +1,15 @@
+web:
+  build: .
+  dockerfile: Dockerfile-development
+  ports:
+   - "9000:9000"
+  # This will mount your current directory as a shared volume,
+  # but mount a persistent docker volume in place of your local node_modules directory.
+  #
+  # This will allow node_modules to persist between docker-compose up runs.
+  # Note that docker-compose down will kill these persistent volumes.
+  volumes:
+   - .:/usr/src/webapp/
+   - node_modules:/usr/src/webapp/node_modules
+  environment:
+   NODE_ENV: development

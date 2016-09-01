@@ -23,6 +23,9 @@
     "browserify",
     "rollupify"
   ],
+  "scripts": {
+    "start": "gulp serve"
+  },
   "devDependencies": {
     "babel-core": "^6.14.0",
     "babel-preset-es2015": "^6.14.0",

@@ -58,6 +58,24 @@ To preview the production-ready build to check if everything is ok:
 $ gulp serve:dist
 ```
 
+### Run with Docker
+
+If you don't want to install Node, npm and all its friends you can run this using [Docker](https://www.docker.com/).
+
+Build the docker image using `docker-compose`
+
+```
+$ docker-compose -f docker-compose-development.yml build
+```
+
+Then all you need is to run a container based on the previously created image
+
+```
+$ docker-compose -f docker-compose-development.yml up
+```
+
+This will start a docker container with the previously built image and it will run `npm run start` script that in its turn will run `gulp serve`.
+
 ### Tasks
 
 To get the list of available tasks, run:
