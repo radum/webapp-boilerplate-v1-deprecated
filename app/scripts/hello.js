@@ -8,7 +8,7 @@ class Hello {
 		this.logger = new Console();
 	}
 
-	hi(name) {
+	sayHi(name) {
 		this.logger.log(this.reply + ' ' + name);
 	}
 

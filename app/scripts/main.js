@@ -1,6 +1,6 @@
 import Hello from './hello';
 
-const app = new Hello();
+const hello = new Hello();
 
-app.hi('Radu');
-app.domUpdate();
+hello.sayHi('Radu');
+hello.domUpdate();
