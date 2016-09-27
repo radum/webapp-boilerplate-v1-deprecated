@@ -1,7 +1,7 @@
 /* eslint "no-console": 0 */
 
 class Console {
-	log(text) {
+	static log(text) {
 		console.log(text);
 	}
 }
