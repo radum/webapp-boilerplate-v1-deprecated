@@ -1,12 +1,17 @@
 $icon-font-path: '../fonts/';
 
+@import "bower_components/bootstrap/scss/bootstrap-flex.scss";
+
 // bower:scss
-@import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
+
+:root {
+	--mainColor: #81d4fa;
+}
 
 body {
 	font-size: 1em;
-	background: #81d4fa;
+	background: var(--mainColor);
 }
 
 .browserupgrade {
@@ -17,5 +22,5 @@ body {
 }
 
 .browserupgrade {
-	background-color: #81d4fc;
+	background-color: var(--mainColor);
 }

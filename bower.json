@@ -1,8 +1,8 @@
 {
-  "name": "webap-browserify",
+  "name": "webapp-boilerplate",
   "private": true,
   "dependencies": {
-    "bootstrap-sass": "^3.3.6"
+    "bootstrap": "v4.0.0-alpha.4"
   },
   "overrides": {
     "bootstrap-sass": {
