@@ -88,10 +88,9 @@ gulp.task('scripts', () => {
 	return bundler
 		.bundle()
 		.on('error', mapError) // Map error reporting
-		.pipe(source('main.js')) // Set source name
+		.pipe(source('main.build.js')) // Set source name
 		.pipe($.plumber()) // Prevent pipe breaking caused by errors from gulp plugins
 		.pipe(buffer()) // Convert to gulp pipeline
-		.pipe($.rename('main.build.js')) // Rename the output file
 		.pipe($.sourcemaps.init({ loadMaps: true })) // Extract the inline sourcemaps
 		.pipe($.sourcemaps.write('.')) // Set folder for sourcemaps to output to
 		.pipe(gulp.dest('.tmp/scripts')) // Set the output folder
