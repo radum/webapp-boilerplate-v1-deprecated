@@ -8,11 +8,11 @@ class Hello {
 		this.logger = new Console();
 	}
 
-	static hi(name) {
+	hi(name) {
 		this.logger.log(this.reply + ' ' + name);
 	}
 
-	static domUpdate() {
+	domUpdate() {
 		setTimeout(() => {
 			$('body').css('background-color', '#FF7043');
 		}, 2000);
