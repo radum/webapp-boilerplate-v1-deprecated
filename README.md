@@ -25,6 +25,7 @@ This is heavily inspired by the [Yeoman generator-webapp](https://github.com/yeo
 * CSS Autoprefixing
 * Built-in preview server with BrowserSync
 * Automagically compile Sass with [libsass](http://libsass.org)
+* Transform styles with [PostCSS](http://postcss.org/) & [CSSNext](http://cssnext.io/) (via [PostCSS](https://github.com/MoOx/postcss-cssnext))
 * Automagically lint your scripts using Eslint (with the Airbnb config) and SCSSLint
 * Automagically compiles your ES6 modules using Browserify
 * Map compiled CSS/JS to source stylesheets/js with source maps
