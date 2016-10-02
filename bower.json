@@ -2,17 +2,9 @@
   "name": "webapp-boilerplate",
   "private": true,
   "dependencies": {
-    "bootstrap": "v4.0.0-alpha.4"
+    "normalize-css": "^4.2.0"
   },
-  "overrides": {
-    "bootstrap-sass": {
-      "main": [
-        "assets/stylesheets/_bootstrap.scss",
-        "assets/fonts/bootstrap/*",
-        "assets/javascripts/bootstrap.js"
-      ]
-    }
-  },
+  "overrides": {},
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^2.4.5"

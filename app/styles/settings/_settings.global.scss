@@ -1,0 +1,16 @@
+///* ========================================================================
+//   #GLOBAL
+//   ======================================================================== */
+
+// The global settings file contains any project-wide variables; things that
+// need to be made available to the entire codebase.
+
+// Typography
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-family-serif:      Georgia, "Times New Roman", Times, serif !default;
+$font-family-monospace:  Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base:       $font-family-sans-serif !default;
+
+// Standardise some UI treatments.
+$base-text-color:       #333 !default;
+$base-background-color: #fff !default;

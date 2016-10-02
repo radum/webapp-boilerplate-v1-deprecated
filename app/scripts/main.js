@@ -1,6 +1,6 @@
-import Hello from './hello';
+import App from './app';
 
-const app = new Hello();
+const app = new App();
 
-app.hi('RaduM');
-app.domUpdate();
+app.sayHi('RaduM');
+app.loadPortfolioItems();

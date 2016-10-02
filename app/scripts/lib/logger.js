@@ -1,9 +1,9 @@
 /* eslint "no-console": 0 */
 
-class Console {
+class Logger {
 	log(text) {
 		console.log(text);
 	}
 }
 
-export default Console;
+export default Logger;
