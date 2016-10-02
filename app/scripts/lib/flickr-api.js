@@ -1,10 +1,12 @@
-import 'whatwg-fetch';
+/* global fetch */
 
 class FlickrAPI {
 	constructor() {
 		this.api_key = '671aab1520e2cb69e08dd36a5f40213b';
 		this.user_id = '54614523@N00';
-		this.flickrParams = `&api_key=${this.api_key}&format=json&nojsoncallback=1&user_id=${this.user_id}`;
+		this.format = '&format=json&nojsoncallback=1';
+
+		this.flickrParams = `&api_key=${this.api_key}${this.format}&user_id=${this.user_id}`;
 		this.url = `https://api.flickr.com/services/rest/?method=flickr.people.getPhotos${this.flickrParams}`;
 	}
 
@@ -12,8 +14,8 @@ class FlickrAPI {
 		return fetch(this.url).then(response => response.json());
 	}
 
-	getPhotoSourceURLs(data) {
-		let photoSources = [];
+	static getPhotoSourceURLs(data) {
+		const photoSources = [];
 
 		data.photos.photo.forEach((photo) => {
 			photoSources.push({

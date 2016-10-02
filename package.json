@@ -73,6 +73,8 @@
     "wiredep": "^4.0.0"
   },
   "dependencies": {
+    "babel-polyfill": "^6.16.0",
+    "fastclick": "^1.0.6",
     "whatwg-fetch": "^1.0.0"
   }
 }
