@@ -6,11 +6,11 @@ const wiredep = require('wiredep').stream; // Used to inject bower components in
 const babelify = require('babelify'); // Used to convert ES6 & JSX to ES5
 const rollupify = require('rollupify'); // Used to tree shake the code
 const browserify = require('browserify'); // Providers "require" support, CommonJS
-const gulpStylelint = require('gulp-stylelint'); // Stylelint linter
 const chalk = require('chalk'); // Allows for coloring for logging
 const source = require('vinyl-source-stream'); // Vinyl stream support
 const buffer = require('vinyl-buffer'); // Vinyl stream support
 const prettyFormatter = require('eslint-formatter-pretty'); // ESlint log pretty format
+const postcssScss = require('postcss-scss'); // SCSS parser for PostCSS
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
@@ -60,7 +60,11 @@ gulp.task('styles', () => {
 			// Log PostCSS messages in the console
 			// https://github.com/postcss/postcss-reporter
 			require('postcss-reporter')()
-		]))
+		], {
+			syntax: postcssScss,
+			parser: postcssScss
+		}
+		))
 		.pipe($.autoprefixer({ browsers: ['> 1%', 'last 2 versions', 'Firefox ESR'] }))
 		.pipe($.sourcemaps.write())
 		.pipe(gulp.dest('.tmp/styles'))
@@ -70,8 +74,8 @@ gulp.task('styles', () => {
 
 gulp.task('lint-css', function lintCssTask() {
 	return gulp
-		.src('app/styles/*.scss')
-		.pipe(gulpStylelint({
+		.src('app/styles/**/*.scss')
+		.pipe($.stylelint({
 			syntax: 'scss',
 			reporters: [
 				{

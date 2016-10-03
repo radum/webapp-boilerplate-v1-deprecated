@@ -2,20 +2,20 @@
 	display: flex;
 	flex-wrap: wrap;
 
-	& .Portfolio__item {
+	.Portfolio__item {
 		width: calc(100% / 3);
 		padding-right: 15px;
 		padding-left: 15px;
 		margin-bottom: 15px;
 	}
 
-	& .Portfolio__media {
+	.Portfolio__media {
 		img {
 			width: 100%;
 		}
 	}
 
-	& .Portfolio__content {
+	.Portfolio__content {
 		padding: 15px;
 		background-color: #fff;
 		border-radius: 2px;
