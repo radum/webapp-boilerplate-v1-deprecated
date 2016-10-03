@@ -92,6 +92,7 @@ gulp.task('scripts', () => {
 
 	bundler.transform(babelify, {
 		presets: ['es2015'],
+		plugins: ['transform-runtime'],
 		sourceMaps: true
 	});
 
