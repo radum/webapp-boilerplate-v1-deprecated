@@ -1,4 +1,6 @@
-# ES6 Web app boilerplate using Gulp + Browserify [![David Dependency Badge](https://david-dm.org/radum/webapp-boilerplate/status.svg)](https://david-dm.org/radum/webapp-boilerplate) [![David Dev Dependency Badge](https://david-dm.org/radum/webapp-boilerplate/dev-status.svg)](https://david-dm.org/radum/webapp-boilerplate?type=dev)
+[![David Dependency Badge](https://david-dm.org/radum/webapp-boilerplate/status.svg)](https://david-dm.org/radum/webapp-boilerplate) [![David Dev Dependency Badge](https://david-dm.org/radum/webapp-boilerplate/dev-status.svg)](https://david-dm.org/radum/webapp-boilerplate?type=dev)
+
+# ES6 Web app boilerplate using Gulp + Browserify
 
 > Scaffold out a front-end web app using [gulp](http://gulpjs.com/) for the build process.
 
@@ -6,7 +8,7 @@
 
 * Enable [ES2015 features](https://babeljs.io/docs/learn-es2015/) using [Babel](https://babeljs.io)
 * CSS Autoprefixing
-* Built-in preview server with BrowserSync
+* Built-in preview server with [BrowserSync](https://www.browsersync.io/)
 * Automagically compile Sass with [libsass](http://libsass.org)
 * Transform styles with [PostCSS](http://postcss.org/) & PostCSS plugins (see gulpfile)
 * Automagically lint your scripts using [Eslint](http://eslint.org/) (with the Airbnb config) and [Stylelint](http://stylelint.io/)
