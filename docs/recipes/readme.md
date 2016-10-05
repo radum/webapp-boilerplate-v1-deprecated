@@ -15,3 +15,5 @@ The recipes are split in 3 main categories.
 ### Dev
 
 ### Tooling
+
+* [Asset revisioning](tooling-asset-revisioning.md) - Asset revisioning (aka revving) for CSS and JS by appending content hash to their filenames.
