@@ -51,7 +51,7 @@ gulp.task('styles', () => {
 		.pipe($.postcss([
 			// W3C variables, e.g. :root { --color: red; } div { background: var(--color); }
 			// https://github.com/postcss/postcss-custom-properties
-	  		require('postcss-custom-properties')(),
+			require('postcss-custom-properties')(),
 			// Generate pixel fallback for "rem" units, e.g. div { margin: 2.5rem 2px 3em 100%; }
 			// https://github.com/robwierzbowski/node-pixrem
 			require('pixrem')(),
