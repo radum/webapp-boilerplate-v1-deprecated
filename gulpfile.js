@@ -3,6 +3,7 @@ const gulpLoadPlugins = require('gulp-load-plugins');
 const browserSync = require('browser-sync'); // Used to automaticaly refresh the browser
 const del = require('del'); // Used for cleaning up the folders
 const wiredep = require('wiredep').stream; // Used to inject bower components into index.html
+const runSequence = require('run-sequence');
 const babelify = require('babelify'); // Used to convert ES6 & JSX to ES5
 const rollupify = require('rollupify'); // Used to tree shake the code
 const browserify = require('browserify'); // Providers "require" support, CommonJS
@@ -181,27 +182,29 @@ gulp.task('extras', () => {
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
-	browserSync({
-		notify: false,
-		port: 9000,
-		server: {
-			baseDir: ['.tmp', 'app'],
-			routes: {
-				'/bower_components': 'bower_components'
+	runSequence(['clean', 'wiredep'], ['styles', 'scripts', 'fonts'], () => {
+		browserSync({
+			notify: false,
+			port: 9000,
+			server: {
+				baseDir: ['.tmp', 'app'],
+				routes: {
+					'/bower_components': 'bower_components'
+				}
 			}
-		}
+		});
+
+		gulp.watch([
+			'app/*.html',
+			'app/images/**/*',
+			'.tmp/fonts/**/*'
+		]).on('change', reload);
+
+		gulp.watch('app/styles/**/*.scss', ['styles']);
+		gulp.watch('app/scripts/**/*.js', ['scripts']);
+		gulp.watch('app/fonts/**/*', ['fonts']);
+		gulp.watch('bower.json', ['wiredep', 'fonts']);
 	});
-
-	gulp.watch([
-		'app/*.html',
-		'app/images/**/*',
-		'.tmp/fonts/**/*'
-	]).on('change', reload);
-
-	gulp.watch('app/styles/**/*.scss', ['styles']);
-	gulp.watch('app/scripts/**/*.js', ['scripts']);
-	gulp.watch('app/fonts/**/*', ['fonts']);
-	gulp.watch('bower.json', ['wiredep', 'fonts']);
 });
 
 gulp.task('serve:dist', () => {
@@ -229,7 +232,7 @@ gulp.task('serve:test', ['scripts'], () => {
 	});
 
 	gulp.watch('app/scripts/**/*.js', ['scripts']);
-	gulp.watch('test/spec/**/*.js').on('change', reload);
+	gulp.watch(['test/spec/**/*.js', 'test/index.html']).on('change', reload);
 	gulp.watch('test/spec/**/*.js', ['lint:test']);
 });
 
@@ -249,13 +252,15 @@ gulp.task('wiredep', () => {
 		.pipe(gulp.dest('app'));
 });
 
-gulp.task('build', ['lint', 'lint-css','html', 'images', 'fonts', 'extras'], () => {
+gulp.task('build', ['lint', 'lint-css', 'html', 'images', 'fonts', 'extras'], () => {
 	return gulp.src('dist/**/*').pipe($.size({ title: 'build', gzip: true }));
 });
 
-gulp.task('default', ['clean'], () => {
+gulp.task('default', () => {
 	GLOBAL.config.env = 'prod';
 	GLOBAL.config.notify = false;
 
-	gulp.start('build');
+	return new Promise((resolve) => {
+		runSequence(['clean', 'wiredep'], 'build', resolve);
+	});
 });
