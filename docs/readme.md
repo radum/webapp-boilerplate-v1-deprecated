@@ -1,5 +1,44 @@
 # Documentation
 
+If you haven't already, follow the steps from [Getting Started](/#getting-started) to setup the project and its dependencies.
+
+Now you can start developing by running:
+
+```
+$ npm start                      # Same as `gulp serve`
+```
+
+This will fire up a local web server, open http://localhost:9000 in your default browser and watch files for changes, reloading the browser automatically via [BrowserSync](https://www.browsersync.io/).
+
+## Folder structure
+
+```
+.
+├── /app/
+│   ├── /fonts/          # Folder where all font files should be stored
+│   ├── /images/         # Put here all static images needed by the project. They will be optimized automatically
+│   ├── /scripts/        # All javascript file will reside in this folder
+│   ├── /styles/         # Stylesheets folder for all Sass files
+│   ├── favicon.ico      # Default favicon icon used in `index.html`
+│   ├── humans.txt       # Humans behind this app. More info at http://humanstxt.org/
+│   ├── index.html       # Main index html file
+│   ├── manifest.json    # W3C webapp manifest files. More info at https://w3c.github.io/manifest/#h2_abstract
+│   ├── manifest.webapp  # Same as above but specialy for Firefox OS. More info at https://github.com/h5bp/html5-boilerplate/pull/1629
+│   ├── robots.txt       # Web Robots file. More info at http://www.robotstxt.org/robotstxt.html
+├── /docs/
+│   ├── /recipes/        # Different options and examples on how to extend this app even further
+│   ├── readme.md        # Recipes readme file, has a TOC of all recipes and explains how they are structured
+├── /test/
+│   ├── /spec/           # All test files will be in here
+│   ├── index.html       # Main point of entry for tests
+```
+
+### Temp & Dist folders
+
+Using gulp while developing a `.tmp` folder is created, containing the compiled stylesheets and scripts.
+
+When the app is built a `dist` folder is created with the entire app build for production. 
+
 ## Recipes
 
 Under [recipes](recipes) folder you can find various examples on how to extend this boilerplate.
@@ -10,15 +49,15 @@ Keep in mind that libsass is feature-wise not fully compatible with Ruby Sass. C
 
 If your favorite feature is missing and you really need Ruby Sass, you can always switch to [gulp-ruby-sass](https://github.com/sindresorhus/gulp-ruby-sass) and update the `styles` task in gulpfile accordingly.
 
-## Gulp plugins
-
-As you might have noticed, gulp plugins (the ones that begin with gulp-) don't have to be require()'d. They are automatically picked up by [gulp-load-plugins](https://github.com/jackfranklin/gulp-load-plugins) and available through the $ variable.
-
 ## Browserify & ES6 modules
 
 While Babel will transpile your code back to ES6 Browserify will bundle your modules into one single file `main.build.js` that is referenced in the main index.html file. Also when building the dist version on top of uglify, I run rollupify also to make the file as small as possible.
 
 The starting point for browserify will be the `main.js` file.
+
+## Gulp plugins
+
+As you might have noticed, gulp plugins (the ones that begin with gulp-) don't have to be require()'d. They are automatically picked up by [gulp-load-plugins](https://github.com/jackfranklin/gulp-load-plugins) and available through the $ variable.
 
 ## Node modules used
 

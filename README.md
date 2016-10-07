@@ -50,6 +50,8 @@ The unit tests are powered by chai and mocha.
 ```
 $ gulp lint                     # Lint script files
 $ gulp lint-css                 # Lint styles
+$ npm run lint                  # Runs the previous lint task
+
 $ gulp serve:test               # Run unit tests
 ```
 
