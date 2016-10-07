@@ -1,6 +1,0 @@
-[submodule "generators/app/templates"]
-	path = generators/app/templates
-	url = https://github.com/radum/webapp-boilerplate.git
-[submodule "app/templates"]
-	path = app/templates
-	url = https://github.com/radum/webapp-boilerplate
