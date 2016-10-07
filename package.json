@@ -1,84 +1,26 @@
 {
-  "private": true,
-  "name": "webapp-boilerplate",
+  "name": "generator-webapp-boilerplate",
   "version": "1.0.0",
   "description": "Scaffold out a front-end web app using Gulp and Browserify",
-  "license": "MIT @ Radu Micu",
   "repository": "radum/webapp-boilerplate",
-  "author": "Radu Micu",
-  "engines": {
-    "node": ">=5",
-    "npm": ">=3.8"
-  },
-  "files": [
-    "app"
-  ],
+  "author": "RaduM",
+  "license": "MIT",
   "keywords": [
-    "web",
-    "app",
-    "front-end",
-    "h5bp",
-    "modernizr",
-    "jquery",
-    "gulp",
-    "browserify",
-    "rollupify"
+    "boilerplate",
+    "scaffolding",
+    "scaffold",
+    "es2015",
+    "es6",
+    "yeoman-generator"
   ],
-  "scripts": {
-    "start": "gulp serve",
-    "lint": "gulp lint && gulp lint-css"
-  },
-  "devDependencies": {
-    "babel-core": "^6.14.0",
-    "babel-plugin-transform-runtime": "^6.15.0",
-    "babel-preset-es2015": "^6.14.0",
-    "babel-runtime": "^6.11.6",
-    "babelify": "^7.3.0",
-    "browser-sync": "^2.16.0",
-    "browserify": "^13.1.0",
-    "chalk": "^1.1.3",
-    "del": "^2.2.2",
-    "eslint": "^3.7.1",
-    "eslint-config-airbnb": "^12.0.0",
-    "eslint-formatter-pretty": "^1.0.0",
-    "eslint-plugin-import": "^2.0.0",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.1",
-    "gulp-cache": "^0.4.5",
-    "gulp-cssnano": "^2.1.2",
-    "gulp-duration": "0.0.0",
-    "gulp-eslint": "^3.0.1",
-    "gulp-htmlmin": "^3.0.0",
-    "gulp-if": "^2.0.1",
-    "gulp-imagemin": "^3.0.3",
-    "gulp-load-plugins": "^1.3.0",
-    "gulp-notify": "^2.2.0",
-    "gulp-plumber": "^1.1.0",
-    "gulp-postcss": "^6.2.0",
-    "gulp-sass": "^2.3.2",
-    "gulp-size": "^2.1.0",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-stylelint": "^3.3.0",
-    "gulp-uglify": "^2.0.0",
-    "gulp-useref": "^3.1.1",
-    "gulp-util": "^3.0.7",
-    "main-bower-files": "^2.13.1",
-    "pixrem": "^3.0.2",
-    "postcss-custom-properties": "^5.0.1",
-    "postcss-flexbugs-fixes": "^2.0.0",
-    "postcss-reporter": "^1.4.1",
-    "postcss-scss": "^0.3.0",
-    "rollupify": "^0.3.4",
-    "run-sequence": "^1.2.2",
-    "sass-mq": "^3.2.9",
-    "stylelint-scss": "^1.3.4",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "wiredep": "^4.0.0"
-  },
+  "files": [
+    "generators",
+    "src"
+  ],
+  "main": "generators\\app\\index.js",
   "dependencies": {
-    "babel-polyfill": "^6.16.0",
-    "fastclick": "^1.0.6",
-    "whatwg-fetch": "^1.0.0"
+    "chalk": "^1.1.3",
+    "yosay": "^1.2.1",
+    "yeoman-generator": "^0.24.1"
   }
 }
