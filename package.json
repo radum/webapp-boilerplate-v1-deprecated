@@ -3,8 +3,8 @@
   "version": "1.0.1",
   "description": "Scaffold out a front-end web app using Gulp and Browserify",
   "repository": "radum/webapp-boilerplate",
-  "author": "RaduM",
-  "license": "MIT",
+  "author": "Radu Micu",
+  "license": "MIT @ Radu Micu",
   "keywords": [
     "boilerplate",
     "scaffolding",
