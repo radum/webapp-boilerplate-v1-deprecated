@@ -10,6 +10,6 @@ web:
   # Note that docker-compose down will kill these persistent volumes.
   volumes:
    - .:/usr/src/webapp/
-   - node_modules:/usr/src/webapp/node_modules
+   - /usr/src/webapp/node_modules
   environment:
    NODE_ENV: development
