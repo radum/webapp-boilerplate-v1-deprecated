@@ -1,5 +1,5 @@
 {
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"name": "ES6 Web app boilerplate",
 	"launch_path": "/index.html",
 	"description": "ES6 Web app boilerplate using Gulp + Browserify",

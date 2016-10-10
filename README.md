@@ -25,7 +25,7 @@
 
 **Step 1.** Make sure that you have Node.js installed on your machine.
 
-**Step 2.** Clone this repository or use Yeoman generator to bootstrap your project:
+**Step 2.** Clone this repository or use [Yeoman generator](https://github.com/radum/webapp-boilerplate/tree/generator-webapp-boilerplate) to bootstrap your project:
 
 ```
 $ git clone -o webapp-boilerplate -b master --single-branch \
@@ -33,6 +33,16 @@ $ git clone -o webapp-boilerplate -b master --single-branch \
 $ cd MyApp
 $ npm install                   # Install project dependencies listed in package.json
 $ bower install                 # Install project dependencies listed in bower.json
+```
+
+<p align="center">——— or ———</p>
+
+```
+$ npm install -g yo
+$ npm install -g generator-webapp-boilerplate
+$ mkdir MyApp
+$ cd MyApp
+$ yo webapp-boilerplate
 ```
 
 **Step 3.** Compile and launch your app by running:
