@@ -14,6 +14,8 @@ The recipes are split in 3 main categories.
 
 ### Dev
 
+* [Nunjucks](dev-nunjucks-tpl.md) - A powerful templating engine with inheritance, asynchronous control, and more.
+
 ### Tooling
 
 * [Asset revisioning](tooling-asset-revisioning.md) - Asset revisioning (aka revving) for CSS and JS by appending content hash to their filenames.
