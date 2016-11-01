@@ -18,13 +18,14 @@ $ npm install --save-dev gulp-nunjucks-render
 
 ### Step 3 - Create a views task
 
-```js
+```diff
 gulp.task('views', () => {
 	return gulp.src('app/*.njk')
 		.pipe($.nunjucksRender({
 			path: 'app'
 		}))
-		.pipe(gulp.dest('.tmp'));
+		.pipe(gulp.dest('.tmp'))
++		.pipe(reload({ stream: true }));
 });
 ```
 
@@ -78,8 +79,7 @@ Edit your `serve` task to watch HTML files in `.tmp`, and so that (a) editing an
  gulp.task('serve', ['views', 'styles', 'fonts'], () => {
  ...
  	gulp.watch([
- 		'app/*.html',
-+		'.tmp/*.html',
+- 		'app/*.html',
  		'.tmp/styles/**/*.css',
  		'app/scripts/**/*.js',
  		'app/images/**/*'
