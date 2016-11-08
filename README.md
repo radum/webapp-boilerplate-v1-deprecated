@@ -65,6 +65,26 @@ $ npm run lint                  # Runs the previous lint task
 $ gulp serve:test               # Run unit tests
 ```
 
+## Linting
+
+ESLint is used for linting JavaScript code. A `.eslintrc.json` file is already provided but you can define rules in your `package.json` under the `"eslint"` field also.
+
+### The `no-undef` rule and tests
+
+The ESLint rule [`no-undef`] will warn about usage of explicitly undeclared variables and functions. Because our tests use global functions like `describe` and `it` (defined by the testing framework), ESLint will consider those as warnings.
+
+Luckily, the fix is easy—add an `.eslintrc.json` file to the `test/spec` directory and let ESLint know about your testing framework. For example, if you're using Mocha, add this to `.eslintrc.json`:
+
+```json
+{
+  "env": {
+    "mocha": true
+  }
+}
+```
+
+Configuration from this `.eslintrc.json` will merge with your project-wide configuration.
+
 ## How to build a distribution
 
 To make a production-ready build of the app, run:

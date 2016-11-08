@@ -1,6 +1,6 @@
 const gulp = require('gulp');
 const gulpLoadPlugins = require('gulp-load-plugins');
-const browserSync = require('browser-sync'); // Used to automaticaly refresh the browser
+const browserSync = require('browser-sync').create(); // Used to automaticaly refresh the browser
 const del = require('del'); // Used for cleaning up the folders
 const babelify = require('babelify'); // Used to convert ES6 & JSX to ES5
 const rollupify = require('rollupify'); // Used to tree shake the code
@@ -14,12 +14,12 @@ const postcssScss = require('postcss-scss'); // SCSS parser for PostCSS
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
-GLOBAL.config = {
+global.config = {
 	env: 'prod',
 	notify: true
 };
 
-GLOBAL.config.env = 'dev';
+global.config.env = 'dev';
 
 function mapError(err) {
 	if (err.fileName) {
@@ -67,7 +67,7 @@ gulp.task('styles', () => {
 		.pipe($.autoprefixer({ browsers: ['> 1%', 'last 2 versions', 'Firefox ESR'] }))
 		.pipe($.sourcemaps.write())
 		.pipe(gulp.dest('.tmp/styles'))
-		.pipe($.if(GLOBAL.config.notify, $.notify({ message: 'Generated file: <%= file.relative %>' })))
+		.pipe($.if(global.config.notify, $.notify({ message: 'Generated file: <%= file.relative %>' })))
 		.pipe(reload({ stream: true }));
 });
 
@@ -99,7 +99,7 @@ gulp.task('scripts', () => {
 		sourceMaps: true
 	});
 
-	if (GLOBAL.config.env !== 'dev') {
+	if (global.config.env !== 'dev') {
 		bundler.transform(rollupify);
 	}
 
@@ -112,34 +112,29 @@ gulp.task('scripts', () => {
 		.pipe($.sourcemaps.init({ loadMaps: true })) // Extract the inline sourcemaps
 		.pipe($.sourcemaps.write('.')) // Set folder for sourcemaps to output to
 		.pipe(gulp.dest('.tmp/scripts')) // Set the output folder
-		.pipe($.if(GLOBAL.config.notify, $.notify({ message: 'Generated file: <%= file.relative %>' }))) // Output the file being created
+		.pipe($.if(global.config.notify, $.notify({ message: 'Generated file: <%= file.relative %>' }))) // Output the file being created
 		.pipe(bundleTimer) // Output time timing of the file creation
 		.pipe(reload({ stream: true })); // Reload the view in the browser
 });
 
-function lint(files, options) {
+function lint(files) {
 	return gulp.src(files)
+		.pipe($.eslint({
+			fix: true
+		}))
 		.pipe(reload({ stream: true, once: true }))
-		.pipe($.eslint(options))
 		.pipe($.eslint.format(prettyFormatter))
 		.pipe($.if(!browserSync.active, $.eslint.failAfterError()));
 }
 
 gulp.task('lint', () => {
-	return lint('app/scripts/**/*.js', {
-		fix: true
-	})
-	.pipe(gulp.dest('app/scripts'));
+	return lint('app/scripts/**/*.js')
+		.pipe(gulp.dest('app/scripts'));
 });
 
 gulp.task('lint:test', () => {
-	return lint('test/spec/**/*.js', {
-		fix: true,
-		env: {
-			mocha: true
-		}
-	})
-	.pipe(gulp.dest('test/spec'));
+	return lint('test/spec/**/*.js')
+		.pipe(gulp.dest('test/spec'));
 });
 
 gulp.task('html', ['styles', 'scripts'], () => {
@@ -180,7 +175,7 @@ gulp.task('extras', () => {
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
-	browserSync({
+	browserSync.init({
 		notify: false,
 		port: 9000,
 		server: {
@@ -203,7 +198,7 @@ gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
 });
 
 gulp.task('serve:dist', () => {
-	browserSync({
+	browserSync.init({
 		notify: false,
 		port: 9000,
 		server: {
@@ -213,7 +208,7 @@ gulp.task('serve:dist', () => {
 });
 
 gulp.task('serve:test', ['scripts'], () => {
-	browserSync({
+	browserSync.init({
 		notify: false,
 		port: 9000,
 		ui: false,
@@ -236,8 +231,8 @@ gulp.task('build', ['lint', 'lint-css', 'html', 'images', 'fonts', 'extras'], ()
 });
 
 gulp.task('default', ['clean'], () => {
-	GLOBAL.config.env = 'prod';
-	GLOBAL.config.notify = false;
+	global.config.env = 'prod';
+	global.config.notify = false;
 
 	gulp.start('build');
 });
