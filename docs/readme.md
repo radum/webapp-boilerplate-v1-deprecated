@@ -37,7 +37,7 @@ This will fire up a local web server, open http://localhost:9000 in your default
 
 Using gulp while developing a `.tmp` folder is created, containing the compiled stylesheets and scripts.
 
-When the app is built a `dist` folder is created with the entire app build for production. 
+When the app is built a `dist` folder is created with the entire app build for production.
 
 ## Recipes
 
@@ -76,7 +76,7 @@ Bellow is the entire list of node modules used and a short description on how th
 "chalk"                           # Terminal string styling done right
 "del"                             # Delete files and folders. Used in our gulpfile to clear build and tmp folders
 "eslint"                          # Used to lint JS code
-"eslint-config-airbnb"            # Eslint Airbnb config
+"eslint-config-airbnb-base"       # Eslint Airbnb config
 "eslint-formatter-pretty"         # Pretty ESLint formatter, prduces nicer reports in the console
 "eslint-plugin-import"            # This plugin intends to support linting of ES2015+ (ES6+) import/export syntax. It loads itself automatically
 "gulp"                            # The streaming build system used in this project
@@ -110,5 +110,4 @@ Bellow is the entire list of node modules used and a short description on how th
 "stylelint-scss"                  # A collection of SCSS specific linting rules for stylelint (in a form of a plugin). Used in .stylelintrc as a plugin
 "vinyl-buffer"                    # Convert streaming vinyl files to use buffers. Used with browserify to convert to gulp pipeline so we can pipe it
 "vinyl-source-stream"             # Use conventional text streams at the start of vinyl pipelines. Used by browserify to set the source name js file
-"wiredep"                         # Wires Bower dependencies to your source code
 ```
