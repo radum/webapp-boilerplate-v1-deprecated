@@ -15,11 +15,9 @@ const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
 
 global.config = {
-	env: 'prod',
+	isDev: true,
 	notify: true
 };
-
-global.config.env = 'dev';
 
 function mapError(err) {
 	if (err.fileName) {
@@ -40,7 +38,7 @@ function mapError(err) {
 gulp.task('styles', () => {
 	return gulp.src('app/styles/*.scss')
 		.pipe($.plumber())
-		.pipe($.sourcemaps.init())
+		.pipe($.if(global.config.isDev, $.sourcemaps.init()))
 		.pipe($.sass.sync({
 			outputStyle: 'expanded',
 			precision: 10,
@@ -65,7 +63,7 @@ gulp.task('styles', () => {
 		}
 		))
 		.pipe($.autoprefixer({ browsers: ['> 1%', 'last 2 versions', 'Firefox ESR'] }))
-		.pipe($.sourcemaps.write())
+		.pipe($.if(global.config.isDev, $.sourcemaps.write()))
 		.pipe(gulp.dest('.tmp/styles'))
 		.pipe($.if(global.config.notify, $.notify({ message: 'Generated file: <%= file.relative %>' })))
 		.pipe(reload({ stream: true }));
@@ -99,7 +97,7 @@ gulp.task('scripts', () => {
 		sourceMaps: true
 	});
 
-	if (global.config.env !== 'dev') {
+	if (!global.config.isDev) {
 		bundler.transform(rollupify);
 	}
 
@@ -109,8 +107,8 @@ gulp.task('scripts', () => {
 		.pipe(source('main.build.js')) // Set source name
 		.pipe($.plumber()) // Prevent pipe breaking caused by errors from gulp plugins
 		.pipe(buffer()) // Convert to gulp pipeline
-		.pipe($.sourcemaps.init({ loadMaps: true })) // Extract the inline sourcemaps
-		.pipe($.sourcemaps.write('.')) // Set folder for sourcemaps to output to
+		.pipe($.if(global.config.isDev, $.sourcemaps.init({ loadMaps: true }))) // Extract the inline sourcemaps
+		.pipe($.if(global.config.isDev, $.sourcemaps.write('.')))
 		.pipe(gulp.dest('.tmp/scripts')) // Set the output folder
 		.pipe($.if(global.config.notify, $.notify({ message: 'Generated file: <%= file.relative %>' }))) // Output the file being created
 		.pipe(bundleTimer) // Output time timing of the file creation
@@ -140,9 +138,18 @@ gulp.task('lint:test', () => {
 gulp.task('html', ['styles', 'scripts'], () => {
 	return gulp.src('app/*.html')
 		.pipe($.useref({ searchPath: ['.tmp', 'app', '.'] }))
-		.pipe($.if('*.js', $.uglify()))
-		.pipe($.if('*.css', $.cssnano({ safe: true, autoprefixer: false })))
-		.pipe($.if('*.html', $.htmlmin({ collapseWhitespace: true })))
+		.pipe($.if(/\.js$/, $.uglify({ compress: { drop_console: true } })))
+		.pipe($.if(/\.css$/, $.cssnano({ safe: true, autoprefixer: false })))
+		.pipe($.if(/\.html$/, $.htmlmin({
+			collapseWhitespace: true,
+			minifyCSS: true,
+			minifyJS: { compress: { drop_console: true } },
+			processConditionalComments: true,
+			removeComments: true,
+			removeEmptyAttributes: true,
+			removeScriptTypeAttributes: true,
+			removeStyleLinkTypeAttributes: true
+		})))
 		.pipe(gulp.dest('dist'));
 });
 
@@ -231,7 +238,7 @@ gulp.task('build', ['lint', 'lint-css', 'html', 'images', 'fonts', 'extras'], ()
 });
 
 gulp.task('default', ['clean'], () => {
-	global.config.env = 'prod';
+	global.config.isDev = false;
 	global.config.notify = false;
 
 	gulp.start('build');
