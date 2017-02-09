@@ -1,6 +1,6 @@
 {
   "name": "generator-webapp-boilerplate",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "Scaffold out a front-end web app using Gulp and Browserify",
   "repository": "radum/webapp-boilerplate",
   "author": "Radu Micu",
