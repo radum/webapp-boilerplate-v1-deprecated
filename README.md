@@ -26,6 +26,12 @@ For more information visit https://github.com/radum/webapp-boilerplate
 
 This generator uses the main master branch as a git submodule. All changes will be automatically applied when it gets installed.
 
+NPM publishing can be handled by [np](https://github.com/sindresorhus/np).
+
+```
+np --any-branch
+```
+
 ## License
 
 Copyright © 2015-present Radu Micu. This source code is licensed under the [MIT license](https://opensource.org/licenses/MIT) © Radu Micu
