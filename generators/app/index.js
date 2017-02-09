@@ -20,7 +20,7 @@ module.exports = class extends Generator {
 	}
 
 	writing() {
-		this.fs.copyl(
+		this.fs.copy(
 			this.templatePath('**/*'),
 			this.destinationRoot(),
 			{
