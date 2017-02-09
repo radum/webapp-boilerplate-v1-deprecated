@@ -17,7 +17,7 @@ module.exports = class extends Generator {
 		this.log(yosay(
 			`Welcome to the amazing ${chalk.red('Webapp boilerplate')} generator!`
 		));
-	},
+	}
 
 	writing() {
 		this.fs.copyTpl(
@@ -34,7 +34,7 @@ module.exports = class extends Generator {
 				},
 			}
 		);
-	},
+	}
 
 	install() {
 		this.installDependencies();
