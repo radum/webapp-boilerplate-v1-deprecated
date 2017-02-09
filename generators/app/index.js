@@ -7,11 +7,11 @@
 * LICENSE.txt file in the root directory of this source tree.
 */
 
-const generators = require('yeoman-generator');
+const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 
-module.exports = generators.Base.extend({
+module.exports = class extends Generator {
 	prompting() {
 		// Have Yeoman greet the user.
 		this.log(yosay(
@@ -20,7 +20,7 @@ module.exports = generators.Base.extend({
 	},
 
 	writing() {
-		this.fs.copy(
+		this.fs.copyTpl(
 			this.templatePath('**/*'),
 			this.destinationRoot(),
 			{
@@ -39,4 +39,4 @@ module.exports = generators.Base.extend({
 	install() {
 		this.installDependencies();
 	}
-});
+};

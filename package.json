@@ -17,6 +17,9 @@
     "generators",
     "src"
   ],
+  "engines": {
+    "node": ">=4.0.0"
+  }
   "main": "generators\\app\\index.js",
   "dependencies": {
     "chalk": "^1.1.3",
