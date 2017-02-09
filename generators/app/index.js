@@ -1,12 +1,3 @@
-/**
-* Yeoman Generator Starter Kit
-*
-* Copyright © 2016-present RaduM. All rights reserved.
-*
-* This source code is licensed under the MIT license found in the
-* LICENSE.txt file in the root directory of this source tree.
-*/
-
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
