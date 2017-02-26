@@ -22,7 +22,7 @@ $ npm install --save-dev gulp-rev gulp-rev-replace
 Instead of wasting performance reading CSS and JS files into a new stream, we can notice that we already have that stream available in the `html` task, so we can just perform revving there:
 
 ```diff
-gulp.task('html', ['styles', 'scripts'], () => {
+gulp.task('html', gulp.series(gulp.parallel('styles', 'scripts'), () => {
 	return gulp.src('app/*.html')
 		.pipe($.useref({ searchPath: ['.tmp', 'app', '.'] }))
 		.pipe($.if('*.js', $.uglify()))
@@ -32,7 +32,7 @@ gulp.task('html', ['styles', 'scripts'], () => {
 +		.pipe($.revReplace())
 		.pipe($.if('*.html', $.htmlmin({ collapseWhitespace: true })))
 		.pipe(gulp.dest('dist'));
-});
+}));
 ```
 
 * `.pipe($.if('*.js', $.rev()))` – at this point we have JS files in the stream, so we are revving them

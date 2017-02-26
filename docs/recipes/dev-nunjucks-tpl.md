@@ -76,7 +76,7 @@ We don't want to copy over `.njk` files in the build process:
 Edit your `serve` task to watch HTML files in `.tmp`, and so that (a) editing an `app/**/*.html` or app/**/*.njk file triggers the `views` task, and (b) reloads the browser:
 
 ```diff
- gulp.task('serve', ['views', 'styles', 'fonts'], () => {
+ gulp.task('serve', gulp.series(gulp.parallel('views', 'styles', 'fonts'), () => {
  ...
  	gulp.watch([
 - 		'app/*.html',
@@ -89,7 +89,7 @@ Edit your `serve` task to watch HTML files in `.tmp`, and so that (a) editing an
 +	gulp.watch('app/**/*.njk', ['views']);
  	gulp.watch('app/styles/**/*.scss', ['styles']);
  	gulp.watch('bower.json', ['wiredep', 'fonts']);
-});
+}));
 ```
 
 Notice we are still watching `.html` files in `app` because our templates have a different extension.

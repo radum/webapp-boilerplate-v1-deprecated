@@ -3,7 +3,6 @@ const gulpLoadPlugins = require('gulp-load-plugins');
 const browserSync = require('browser-sync').create(); // Used to automaticaly refresh the browser
 const del = require('del'); // Used for cleaning up the folders
 const babelify = require('babelify'); // Used to convert ES6 & JSX to ES5
-const rollupify = require('rollupify'); // Used to tree shake the code
 const browserify = require('browserify'); // Providers "require" support, CommonJS
 const chalk = require('chalk'); // Allows for coloring for logging
 const source = require('vinyl-source-stream'); // Vinyl stream support
@@ -16,7 +15,7 @@ const reload = browserSync.reload;
 
 global.config = {
 	isDev: true,
-	notify: true
+	notify: false
 };
 
 function mapError(err) {
@@ -38,7 +37,7 @@ function mapError(err) {
 gulp.task('styles', () => {
 	return gulp.src('app/styles/*.scss')
 		.pipe($.plumber())
-		.pipe($.if(global.config.isDev, $.sourcemaps.init()))
+		.pipe($.if(global.config.isDev, $.sourcemaps.init({ loadMaps: true }))) // Extract the inline sourcemaps
 		.pipe($.sass.sync({
 			outputStyle: 'expanded',
 			precision: 10,
@@ -63,7 +62,7 @@ gulp.task('styles', () => {
 		}
 		))
 		.pipe($.autoprefixer({ browsers: ['> 1%', 'last 2 versions', 'Firefox ESR'] }))
-		.pipe($.if(global.config.isDev, $.sourcemaps.write()))
+		.pipe($.if(global.config.isDev, $.sourcemaps.write('.')))
 		.pipe(gulp.dest('.tmp/styles'))
 		.pipe($.if(global.config.notify, $.notify({ message: 'Generated file: <%= file.relative %>' })))
 		.pipe(reload({ stream: true }));
@@ -96,10 +95,6 @@ gulp.task('scripts', () => {
 		plugins: ['transform-runtime'],
 		sourceMaps: true
 	});
-
-	if (!global.config.isDev) {
-		bundler.transform(rollupify);
-	}
 
 	return bundler
 		.bundle()
@@ -135,7 +130,7 @@ gulp.task('lint:test', () => {
 		.pipe(gulp.dest('test/spec'));
 });
 
-gulp.task('html', ['styles', 'scripts'], () => {
+gulp.task('html', gulp.series(gulp.parallel('styles', 'scripts'), function htmlBundle() {
 	return gulp.src('app/*.html')
 		.pipe($.useref({ searchPath: ['.tmp', 'app', '.'] }))
 		.pipe($.if(/\.js$/, $.uglify({ compress: { drop_console: true } })))
@@ -151,7 +146,7 @@ gulp.task('html', ['styles', 'scripts'], () => {
 			removeStyleLinkTypeAttributes: true
 		})))
 		.pipe(gulp.dest('dist'));
-});
+}));
 
 gulp.task('images', () => {
 	return gulp.src('app/images/**/*')
@@ -181,7 +176,7 @@ gulp.task('extras', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
+gulp.task('serve', gulp.series(gulp.parallel('styles', 'scripts', 'fonts'), function serveBundle() {
 	browserSync.init({
 		notify: false,
 		port: 9000,
@@ -199,10 +194,10 @@ gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
 		'.tmp/fonts/**/*'
 	]).on('change', reload);
 
-	gulp.watch('app/styles/**/*.scss', ['styles']);
-	gulp.watch('app/scripts/**/*.js', ['scripts']);
-	gulp.watch('app/fonts/**/*', ['fonts']);
-});
+	gulp.watch('app/styles/**/*.scss', gulp.series('styles'));
+	gulp.watch('app/scripts/**/*.js', gulp.series('scripts'));
+	gulp.watch('app/fonts/**/*', gulp.series('fonts'));
+}));
 
 gulp.task('serve:dist', () => {
 	browserSync.init({
@@ -214,7 +209,7 @@ gulp.task('serve:dist', () => {
 	});
 });
 
-gulp.task('serve:test', ['scripts'], () => {
+gulp.task('serve:test', gulp.series('scripts', function serveTest() {
 	browserSync.init({
 		notify: false,
 		port: 9000,
@@ -228,18 +223,23 @@ gulp.task('serve:test', ['scripts'], () => {
 		}
 	});
 
-	gulp.watch('app/scripts/**/*.js', ['scripts']);
+	gulp.watch('app/scripts/**/*.js', gulp.series('scripts'));
 	gulp.watch(['test/spec/**/*.js', 'test/index.html']).on('change', reload);
-	gulp.watch('test/spec/**/*.js', ['lint:test']);
-});
+	gulp.watch('test/spec/**/*.js', gulp.series('lint:test'));
+}));
 
-gulp.task('build', ['lint', 'lint-css', 'html', 'images', 'fonts', 'extras'], () => {
-	return gulp.src('dist/**/*').pipe($.size({ title: 'build', gzip: true }));
-});
+gulp.task(
+	'build',
+	gulp.series(gulp.parallel('lint', 'lint-css'),
+	gulp.parallel('html', 'images', 'fonts', 'extras'),
+	function build() {
+		return gulp.src('dist/**/*').pipe($.size({ title: 'build', gzip: true }));
+	}
+));
 
-gulp.task('default', ['clean'], () => {
+gulp.task('default', gulp.series('clean', function defaultTask(done) {
 	global.config.isDev = false;
 	global.config.notify = false;
 
-	gulp.start('build');
-});
+	done();
+}, 'build'));

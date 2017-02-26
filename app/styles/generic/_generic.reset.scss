@@ -32,8 +32,17 @@ li > {
  * Remove default table spacing.
  */
 table {
-	border-spacing: 0;
 	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/**
+ * 1. Reset Chrome and Firefox behaviour which sets a `min-width: min-content;`
+ *    on fieldsets.
+ */
+fieldset {
+	min-width: 0; /* [1] */
+	border: 0;
 }
 
 /* stylelint-enable selector-list-comma-newline-after */

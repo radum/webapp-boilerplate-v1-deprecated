@@ -1,6 +1,6 @@
 [![David Dependency Badge](https://david-dm.org/radum/webapp-boilerplate/status.svg)](https://david-dm.org/radum/webapp-boilerplate) [![David Dev Dependency Badge](https://david-dm.org/radum/webapp-boilerplate/dev-status.svg)](https://david-dm.org/radum/webapp-boilerplate?type=dev)
 
-# ES6 Web app boilerplate using Gulp + Browserify
+# ES6 Web app boilerplate using Gulp 4 + Browserify
 
 > Scaffold out a front-end web app using [gulp](http://gulpjs.com/) for the build process.
 
@@ -14,12 +14,11 @@
 * Automagically lint your scripts using [Eslint](http://eslint.org/) (with the Airbnb config) and [Stylelint](http://stylelint.io/)
 * Automagically compiles your ES6 modules using Browserify
 * Map compiled CSS/JS to source stylesheets/js with source maps
-* Awesome image optimization
-* Automagically wire-up dependencies installed with [Bower](http://bower.io) via [wiredep](https://github.com/taptapship/wiredep)
+* Awesome image optimization via [imagemin](https://github.com/imagemin/imagemin)
 * Development using Docker if needed
-* inuitcss + BEM + SuitCSS architecture and CSS structure
+* CSS architecture and CSS structure inspired and mostly copied from [inuitcss](https://github.com/inuitcss/inuitcss), [BEM](http://getbem.com/), [SuitCSS](https://github.com/suitcss)
 
-*For more information on what this can do for you, take a look at the [gulp plugins](app/templates/_package.json) used in our `package.json`.* or read the docs
+*For more information on what this can do for you, take a look at the [gulp plugins](package.json) used in our `package.json`.* or read the docs
 
 ## Getting Started
 
@@ -130,7 +129,7 @@ Anyone and everyone is welcome to [contribute](CONTRIBUTING.md) to this project.
 
 ## Credits
 
-This is heavily inspired by the [Yeoman generator-webapp](https://github.com/yeoman/generator-webapp) so most credit will go to the Yeoman team. Thank you all for the great work.
+This is heavily inspired by the [Yeoman generator-webapp](https://github.com/yeoman/generator-webapp) so most credit will go to the Yeoman team and by [inuitcss](https://github.com/inuitcss/inuitcss). Thank you all for the great work you have done so far.
 
 ## License
 

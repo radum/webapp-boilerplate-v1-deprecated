@@ -41,7 +41,6 @@
  *
  * UTILITIES
  * Clearfix.............Bind our clearfix onto a utility class.
- * Widths...............Simple width helper classes.
  * Headings.............Reassigning our heading styles to helper classes.
  * Spacing..............Nudge bits of the DOM around with these spacing
  *                      classes.
@@ -86,6 +85,9 @@
 
 // UTILITIES
 @import "utilities/utilities.clearfix";
+@import "utilities/utilities.headings";
+@import "utilities/utilities.spacings";
+@import "utilities/utilities.print";
 @import "utilities/utilities.hide";
 
 @import "shame";

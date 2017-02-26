@@ -105,7 +105,6 @@ Bellow is the entire list of node modules used and a short description on how th
 "postcss-flexbugs-fixes"          # PostCSS plugin This project tries to fix all of flexbug's issues
 "postcss-reporter"                # Log PostCSS messages in the console
 "postcss-scss"                    # SCSS parser for PostCSS, used in gulpfile.js
-"rollupify"                       # Browserify transform to apply Rollup
 "sass-mq"                         # mq() is a Sass mixin that helps manipulating media queries in an elegant way, used for responsive design
 "stylelint-scss"                  # A collection of SCSS specific linting rules for stylelint (in a form of a plugin). Used in .stylelintrc as a plugin
 "vinyl-buffer"                    # Convert streaming vinyl files to use buffers. Used with browserify to convert to gulp pipeline so we can pipe it
