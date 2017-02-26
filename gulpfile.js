@@ -7,8 +7,10 @@ const browserify = require('browserify'); // Providers "require" support, Common
 const chalk = require('chalk'); // Allows for coloring for logging
 const source = require('vinyl-source-stream'); // Vinyl stream support
 const buffer = require('vinyl-buffer'); // Vinyl stream support
+const vmap = require('vinyl-map'); // Map vinyl files' contents as strings, so you can easily use existing code without needing yet another gulp plugin
 const prettyFormatter = require('eslint-formatter-pretty'); // ESlint log pretty format
 const postcssScss = require('postcss-scss'); // SCSS parser for PostCSS
+const CleanCSS = require('clean-css'); // Optimize dist CSS
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
@@ -33,6 +35,10 @@ function mapError(err) {
 		+ chalk.yellow(err.message));
 	}
 }
+
+const stylesMinify = vmap((buff) => {
+	return new CleanCSS().minify(buff.toString()).styles;
+});
 
 gulp.task('styles', () => {
 	return gulp.src('app/styles/*.scss')
@@ -134,7 +140,7 @@ gulp.task('html', gulp.series(gulp.parallel('styles', 'scripts'), function htmlB
 	return gulp.src('app/*.html')
 		.pipe($.useref({ searchPath: ['.tmp', 'app', '.'] }))
 		.pipe($.if(/\.js$/, $.uglify({ compress: { drop_console: true } })))
-		.pipe($.if(/\.css$/, $.cssnano({ safe: true, autoprefixer: false })))
+		.pipe($.if(/\.css$/, stylesMinify))
 		.pipe($.if(/\.html$/, $.htmlmin({
 			collapseWhitespace: true,
 			minifyCSS: true,
