@@ -131,6 +131,8 @@ Anyone and everyone is welcome to [contribute](CONTRIBUTING.md) to this project.
 
 This is heavily inspired by the [Yeoman generator-webapp](https://github.com/yeoman/generator-webapp) so most credit will go to the Yeoman team and by [inuitcss](https://github.com/inuitcss/inuitcss). Thank you all for the great work you have done so far.
 
+Also thanks to Joe Zim for his [migration tutorial](https://www.joezimjs.com/javascript/complete-guide-upgrading-gulp-4/) to Gulp 4
+
 ## License
 
 Copyright © 2015-present Radu Micu. This source code is licensed under the [MIT license](https://opensource.org/licenses/MIT) © Radu Micu
