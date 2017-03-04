@@ -68,6 +68,7 @@
     "postcss-flexbugs-fixes": "^2.1.0",
     "postcss-reporter": "^3.0.0",
     "postcss-scss": "^0.4.1",
+    "rollupify": "^0.3.9",
     "sass-mq": "^3.3.2",
     "stylelint-scss": "^1.4.3",
     "vinyl-buffer": "^1.0.0",

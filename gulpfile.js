@@ -2,8 +2,9 @@ const gulp = require('gulp');
 const gulpLoadPlugins = require('gulp-load-plugins');
 const browserSync = require('browser-sync').create(); // Used to automaticaly refresh the browser
 const del = require('del'); // Used for cleaning up the folders
-const babelify = require('babelify'); // Used to convert ES6 & JSX to ES5
 const browserify = require('browserify'); // Providers "require" support, CommonJS
+const babelify = require('babelify'); // Used to convert ES6 & JSX to ES5
+const rollupify = require('rollupify'); // Used to tree shake the code
 const chalk = require('chalk'); // Allows for coloring for logging
 const source = require('vinyl-source-stream'); // Vinyl stream support
 const buffer = require('vinyl-buffer'); // Vinyl stream support
@@ -95,6 +96,11 @@ gulp.task('scripts', () => {
 	});
 
 	const bundleTimer = $.duration('JS browserify bundle time');
+
+	// Need to come first in the transform order for browserify.
+	if (!global.config.isDev) {
+		bundler.transform(rollupify);
+	}
 
 	bundler.transform(babelify, {
 		presets: ['es2015'],
